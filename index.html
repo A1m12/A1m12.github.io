@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>202510176_박준혁 | PORTFOLIO</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+            background: #f4f5fb;
+            color: #333;
+            min-height: 100vh;
+        }
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e5e7f0;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+        .myinner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #222;
+            cursor: pointer;
+        }
+        nav ul {
+            display: flex;
+            gap: 14px;
+            list-style: none;
+        }
+        nav a {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #555;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        nav a:hover,
+        nav a.active {
+            background: #4f46e5;
+            color: #fff;
+        }
+        main {
+            max-width: 1080px;
+            margin: 32px auto;
+            padding: 0 20px 40px;
+        }
+        .spa-page {
+            display: none;
+        }
+        .spa-page.active {
+            display: block;
+        }
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 26px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+        }
+        .myimage img {
+            width: 100%;
+            max-width: 300px;       
+            height: 300px;          
+            border-radius: 16px;
+            object-fit: cover;     
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .mytext {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .mytext h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: #1c1c35;
+        }
+        .mytext p {
+            color: #4f4f5d;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        .tag {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #3b5bdb;
+            font-size: 13px;
+        }
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .hero-links a {
+            color: #3b5bdb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .hero-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 전공/학업 */
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 18px;
+            color: #23233d;
+        }
+        .academic-list {
+            display: grid;
+            gap: 16px;
+        }
+        .academic-item {
+            background: #fff;
+            border: 1px solid #e5e7f0;
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .academic-item .category {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #3b5bdb;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .academic-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #1f1f35;
+        }
+        .academic-item p {
+            color: #555565;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        .academic-meta {
+            font-size: 14px;
+            color: #6b6b7f;
+        }
+
+        /* 취미 탭 */
+        .projects {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .project-card {
+            background: #fff;
+            border: 1px solid #e5e7f0;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .project-card h3 {
+            font-size: 20px;
+            color: #1f1f35;
+            margin-bottom: 12px;
+        }
+        .project-card p {
+            color: #4f4f5d;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+        .project-card ul {
+            padding-left: 18px;
+            color: #56566d;
+            line-height: 1.7;
+        }
+        .project-card ul li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px 0;
+            color: #71718a;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 640px) {
+            .myinner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="myinner">
+            <a class="logo" id="logo-btn">Park JunHyuk</a>
+            <nav>
+                <ul>
+                    <li><a data-target="home" class="nav-link active">Home</a></li>
+                    <li><a data-target="academic" class="nav-link">Academic</a></li>
+                    <li><a data-target="hobby" class="nav-link">My Hobby</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="spa-page active">
+            <div class="hero">
+                <div class="myimage">
+                    <img src="Profile.jpg" alt="Park JunHyuk">
+                </div>
+                <div class="mytext">
+                    <h1>안녕하세요, 강원대 컴퓨터공학과 25학번 박준혁입니다.</h1>
+                    <p> 2006년에 태어나 성남중/고등학교를 다니면서 컴퓨터에 흥미가 생겨
+                        2025년에 강원대학교 컴퓨터공학과에 입학하였습니다.
+                        현재는 컴퓨터공학과 2학년에 재학 중이며, 전공 지식을 탄탄히 쌓아가고 있습니다.
+                        C와 Java 프로그래밍을 배우며 알고리즘 문제풀이에도 흥미를 느끼고 있습니다.
+                    </p>
+                    <div class="tag-list">
+                        <span class="tag">C / C++</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">HTML5 & CSS3</span>
+                        <span class="tag">Algorithm</span>
+                    </div>
+                    <div class="mytext-links">
+                        <a href="mailto:wnsgur7067@gmail.com">Email</a>
+                        <a href="https://github.com/A1m12" target="_blank">GitHub</a>
+                        <a href="https://www.instagram.com/wns.h12/" target="_blank">Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="academic" class="spa-page">
+            <h2 class="section-title">Academic & Interests</h2>
+            <div class="academic-list">
+                <div class="academic-item">
+                    <span class="category">Major Courses</span>
+                    <h3>전공 수강 과목</h3>
+                    <p>학부 과정에서 이수 중인 주요 핵심 전공 교과목입니다. 기본적인 전공 기초 및 더 나아가 활용에 대한 이해를 높이고 있습니다.</p>
+                    <div class="academic-meta">자료구조, 웹 프로그래밍, 객체지향 프로그래밍, C/C++ 프로그래밍</div>
+                </div>
+                <div class="academic-item">
+                    <span class="category">Interests</span>
+                    <h3>학업 및 연구 관심 분야</h3>
+                    <p>아직 어느 분야로 갈지는 생각하며 고민하고 있어 기초 지식을 탄탄히 쌓고 있습니다.</p>
+                    <div class="academic-meta">C/C++ Programming, Data Structures, Java Programming</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hobby" class="spa-page">
+            <h2 class="section-title">My Hobby</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>수영</h3>
+                    <p>학교 수업을 마치고 매주 수영을 즐겨하는 취미를 가지고 있습니다.</p>
+                    <ul>
+                        <li>부족한 체력 향상</li>
+                        <li>공부로 인한 스트레스 해소</li>
+                        <li>건강한 생활습관 유지</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h3>개발관련 공부하기</h3>
+                    <p>요즘 트렌드와 그에 따른 부족한 부분을 채우기 위해 공부하고 있습니다.</p>
+                    <ul>
+                        <li>C/C++ 프로그래밍 독학 </li>
+                        <li>Java 프로그래밍 독학</li>
+                        <li>Youtube를 활용한 요즘 개발시장에 대한 공부</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Copyright © 2026 Park JunHyuk (wnsgur7067@gmail.com) All Rights Reserved.
+    </footer>
+    <script>
+        $(document).ready(function() {
+            $('.nav-link').on('click', function(e) {
+                e.preventDefault();
+                var targetPage = $(this).attr('data-target');
+                
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+                
+                $('.spa-page').removeClass('active');
+                $('#' + targetPage).addClass('active');
+            });
+            
+            $('#logo-btn').on('click', function() {
+                $('nav ul li a[data-target="home"]').trigger('click');
+            });
+        });
+    </script>
+</body>
+</html>
